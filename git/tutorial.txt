@@ -1,0 +1,302 @@
+GIT
+
+github 계정 만들기
+create reposiroty
+
+데스크톱에 git 설치
+
+cmd 창에
+git --version
+git config --global user.name 계정명
+git config --global user.email 이메일주소
+
+해당 경로로 가서 ex) C:\Education
+git clone https://github.com/fDevJc/Git-Tutorial.git
+클론은 다운로드라고 보면된다.
+
+로컬 레파지토리
+원격 레파지토리
+
+로컬 레파지토리에 파일(document.txt)을 만듬
+git commit -m "Add Text File[document.txt]"
+로컬 컴퓨터에는 적용되었지만 깃허브에는 적용이 안되어있음
+git push
+푸시를 해야 깃허브에 적용되어있음
+
+오픈 소스란 공개된 소스코드를 의미
+
+오픈소스 라이센스
+MIT License: 무료, 배포가능, 소스코드 수정가능 2차 저작물 공개 의무 없음
+Apache License: 무료, 배포가능, 소스코드 수정가능 2차 저작물 공개 의무 없음
+GPL: 무료, 배포가능, 소스코드 수정 가능, 2차 저작물 공개 의무 있음
+Beerware: 만나면 그냥 술이나 사주자
+
+Git이 등장한 배경
+
+Git 동작 과정
+Working Directory -git add> 
+Staging Area -git commit> 
+Local Reposiroty -git Push>
+Remote Reposiroty
+
+Remote Reposiroty-git fetch>
+Local Reposiroty-git merge>
+Working Directory
+
+git fetch + git merge => git pull
+
+저장소에 대해서 (Reposiroty)
+실제 소스코드가 담겨있으면서 모든 작업 이력이 담겨있는 공간
+각종데이터는 .git 에 담겨있음
+
+Git 반영
+
+git status
+입력하면 만든파일 리스트가 나옴
+git add test.py
+입력하면 Staging Area에 해당 파일이 올라감
+git reset test.py
+입력하면 Staging Area에서 해당파일이 없어짐
+
+git add .
+모든파일을 애드시키고 싶을때
+
+git commit -m "Add test.py"
+Local Reposiroty에 커밋
+
+git push
+Remote Reposiroty에 푸쉬
+
+파일을 수정하고 git status라고 입력하면
+수정된 파일 리스트를 확인 가능
+
+git restore test.py 라고 입력하면
+수정했던 내역이 사라지고 최종버전 다시 받아옴
+
+git log
+커밋한 로그를 확인가능
+
+git reset --hard 12ad75f525d511a3adcf38c1c7531175f0737093
+특정지점으로 소스코드 변경
+--hard 옵션은 특정 커밋지정 이후는 다지워버리겠다
+--soft 돌아가고 나서도 이후 이력 남겨둠
+
+여기까지 입력한 상태에서는 Local Reposiroty와 Remote Reposiroty가 달라진상태
+구조가 완전히 달라져서 push명령이 에러난다
+이때 
+git push -f
+-f 옵션을 주면 강제로 로컬을 리모트에 올린다
+
+git commit --amend
+커밋메세지 변경방법
+
+브랜치(Branch)
+깃은 동시에 여러 개발자들이 프로젝트에서 각기 다른 기능을 개발할수있도록
+브런치를 개발
+
+기본적으로 깃 저장소를 만들면 마스터브런치가 생성
+일반적으로 마스터브런치는 배포가 가능한 수준의 안정화된 버전
+
+마스터브런치 ----------------------------->
+        디벨로프 브런치
+        버그 픽스 브런치 
+
+통합브랜치 : 마스터브랜치를 의미
+토픽브랜치 : 디벨로프, 버그픽스 등
+
+git branch
+현재 존재하는 브랜치 리스트 확인
+
+git branch develop
+develop란 이름의 브랜치 생성
+
+git checkout develop
+디벨로프 브랜치로 옮겨간다
+
+git checkout master
+디벨로프 브런치로 파일 수정후
+마스터 브랜치로 이동
+git merge develop
+디벨로프 브런치와 머지
+
+git branch -d develop
+머지가 끝나고 역할을 다한 브랜치를 삭제할때 -d옵션
+
+브랜치간의 충돌
+git branch develop 디벨로프 브랜치 생성
+git checkout develop 디벨로프 브랜치로 이동
+test.py 파일수정
+git add .
+git commit -m "adsadad"
+
+git checkout master 마스터 브랜치로 이동
+test.py 파일수정
+git add
+git commit -m "asdasdasa"
+
+git merge develop
+conflict가 발생했다는 내용과 함께 머지가 실패함(충돌)
+
+def sub(a,b):
+<<<<<<< HEAD
+    return a-b #주석
+=======
+    return a-b
+
+def div(a,b):
+    return a//b
+>>>>>>> develop
+
+파일 내용에 이런식으로 들어감
+둘중에 하나를 선택해서
+파일을 수동으로 수정후 저장
+
+다시
+git add .
+git commit -m "asdasdd"
+
+이렇게 하면 자동적으로 병합이 완료됨
+
+git에서 원격 레파지토리를 관리하는 방법
+
+git remote
+현재 원격 레파지토리 확인가능
+
+git remote show origin
+원격 레파티토리의 자세한 정보를 보여줌
+* remote origin
+  Fetch URL: https://github.com/fDevJc/Git-Tutorial.git
+  Push  URL: https://github.com/fDevJc/Git-Tutorial.git
+  HEAD branch: master
+  Remote branch:
+    master tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+
+git remote add test https://github.com/fDevJc/Git-Study.git
+다른 원격 레파지토리 추가 test라는 이름으로
+
+git remote -v
+원격 레파지토리 버전 확인가능
+origin  https://github.com/fDevJc/Git-Tutorial.git (fetch)
+origin  https://github.com/fDevJc/Git-Tutorial.git (push)
+test    https://github.com/fDevJc/Git-Study.git (fetch)
+test    https://github.com/fDevJc/Git-Study.git (push)
+
+git remote rename test temp
+원격 레파지토리 이름 변경 가능
+git remote -v
+origin  https://github.com/fDevJc/Git-Tutorial.git (fetch)
+origin  https://github.com/fDevJc/Git-Tutorial.git (push)
+temp    https://github.com/fDevJc/Git-Study.git (fetch)
+temp    https://github.com/fDevJc/Git-Study.git (push)
+
+git remote rm temp
+원격 레파지토리 삭제
+git remote -v
+origin  https://github.com/fDevJc/Git-Tutorial.git (fetch)
+origin  https://github.com/fDevJc/Git-Tutorial.git (push)
+
+git에서 로그확인방법
+git log --stat
+-p
+--graph
+
+git log --pretty=oneline
+로그가 한줄로 표현
+fe02d0b1b5a40da52b807700e5225e5ed89cffa3 (HEAD -> master, origin/master) Add test.py[div] & comment
+0a643528b839c52aedb67178664f0b9b53e1512f Add test.py[div] & comment
+7eb064a6d321ad1bad292373f2999442afd9d6a7 Add test.py[div]
+934d3934fce6678c596969982124170b65a83f91 Add test.py [sub]
+9aeb9f62b19d20230bbd07d1c94c853c540438b0 Add test.py[add & mul]
+12ad75f525d511a3adcf38c1c7531175f0737093 Add Text File[document.txt]
+
+git log --pretty=format:"%h -> %an, %ar : %s" --graph
+*   fe02d0b -> fDevJc, 18 minutes ago : Add test.py[div] & comment
+|\
+| * 7eb064a -> fDevJc, 25 minutes ago : Add test.py[div]
+* | 0a64352 -> fDevJc, 23 minutes ago : Add test.py[div] & comment
+|/
+* 934d393 -> fDevJc, 35 minutes ago : Add test.py [sub]
+* 9aeb9f6 -> fDevJc, 2 hours ago : Add test.py[add & mul]
+* 12ad75f -> fDevJc, 4 hours ago : Add Text File[document.txt]
+
+git에서 소개글작성방법
+README.md
+# Git-Tutorial
+
+## Git-Tutorial
+
+### Git-Tutorial
+
+소스코드 블록은 다음과 같이 작성할 수 있습니다.
+
+C
+```c
+#include <stdio.h>
+
+int main(void){
+  printf("Hello World!");
+  return 0;
+}
+```
+Python
+```python
+print("Hello World!")
+```
+
+링크는 다음과 같이 작성할 수 있습니다.
+[블로그 주소](https://naver.com)
+
+순서 없는 목록은 다음과 같이 작성할 수 있습니다.
+
+* 깃 튜토리얼
+  * 깃 클론
+  * 깃 풀
+    * 깃 커밋
+      * 깃 커밋1
+      * 깃 커밋2
+  
+인용 구분은 다음과 같이 작성할수 있습니다.
+> '깃 공부' -양지철-
+
+테이블은 다음과 같이 작성
+
+이름|영어|정보|수학
+---|---|---|---
+홍길동|1점|2점|3점|4점
+이순신|5점|6점|7점|8점
+
+강조는 다음과 같이
+
+**치킨** 먹다가 ~~두드러기~~ 낫슴
+
+git archive --format=zip master -o Master.zip
+            포맷은 집파일 브랜치이름 -o 경로/파일명
+
+소스코드만 집파일로 묶어짐
+
+rebase( 기능이 많음)
+커밋메시지를 수정하거나 삭제등
+
+git rebase -i
+git rebase -i HEAD~3
+가장 앞쪽에서 세번째
+git rebase -i 해쉬값
+해당 커밋 해쉬값 위로 모두 보여줌
+
+에디트로 이동되고 reword라고 앞에쓰고 저장하면
+다시 에딧창이 뜨고 수정
+
+특정커밋 삭제
+git rebase -i HEAD~3 로 들어가서 삭제 명령어 입력
+
+환경설정
+컴퓨터에 깃 설치하면
+
+git init
+
+git filter 명령어
+

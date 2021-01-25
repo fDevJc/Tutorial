@@ -1,0 +1,121 @@
+<2021.01.25 (월)>
+###Java Script
+6. Object , Class 
+
+class
+-template
+-declare once
+-no data in
+
+Object
+-instance of a class
+-created many times
+-data in
+
+클래스 정의 및 오브젝트 생성
+class Person{
+    //constructor
+    constructor(name,age){
+        //field
+        this.name = name;
+        this.age = age;
+    }
+
+    //method
+    speak(){
+        console.log(`${this.name}: hello!!`);
+    }
+}
+
+const jc = new Person("jc",30);
+
+console.log(jc.name);
+console.log(jc.age);
+
+jc.speak();
+
+게터 세터 
+
+class User{
+    constructor(firstName, lastName , age){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    get age(){
+        return this._age;
+    }
+
+    set age(value){
+        
+        this._age = value < 0 ? 0 : value;
+    }
+}
+
+const user1 = new User("Steve","Job",-1) //실수로 -1으로 설정
+
+console.log(user1.age);
+
+퍼블릭 프라이빗 - 나온지 얼마안되서 아직 많이 안씀
+class Experiment{
+    publicField = 2;
+    #privateField = 0; //private field 최근에 추가된것
+}
+
+static 클래스에 공통적으로 쓸때
+class Article{
+    static publisher = 'Dream Coding'
+}
+
+
+const article1 = new Article();
+const article2 = new Article();
+
+console.log(article1.publisher);//undefined
+
+console.log(Article.publisher);//Dream Coding
+
+//상속과 다양성
+
+class Shape{
+    constructor(width,height,color){
+        this.width = width;
+        this.height = height;
+        this.color = color;
+    }
+
+    draw(){
+        console.log(`draw ${this.color}`);
+    }
+
+    getArea(){
+        return this.width * this.height;
+    }
+}
+
+class Rectangle extends Shape{}
+class Triangle extends Shape{
+    draw(){
+        super.draw();//부모의 메서드 호출
+        console.log("tri");
+    }
+    //오버라이딩
+    getArea(){
+        return this.width * this.height / 2
+    }
+}
+
+const rect = new Rectangle(10,20,"black");
+const tri = new Triangle(10,20,"blue")
+
+
+rect.draw();
+
+//
+tri.draw();
+
+console.log(rect.getArea());
+console.log(tri.getArea());
+
+//instanceof

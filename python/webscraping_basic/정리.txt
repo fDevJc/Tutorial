@@ -1,0 +1,49 @@
+html
+css
+javascript
+xpath
+크롬개발자도구
+-xpath 쉽게 따는법
+정규식
+ .
+ ^
+ $
+ match()
+ search()
+ findall()
+
+user-agent
+
+Reuqests 빠르다 , 동적 웹페이지 X
+주어진 url을 통해 받아온 html에 원하는 정보가 있을때
+res.raise_for_status()
+
+Selenium 느리다 , 동적 웹페이지 O
+로그인, 결과에 대한 필터링등 어떤동작
+크롬버전에 맞는 chromedriver.exe가 있어야함
+find_element(s)_by_id
+find_element(s)_by_class_name
+find_element(s)_by_link_text
+find_element(s)_by_xpath
+click()
+send_key()
+
+BeautifulSoup 으로 추출
+find
+find_all
+find_next_sibling(s)
+find_previous_sibling(s)
+
+soup["href"]
+soup.get_text()
+
+이미지 다운로드
+with open("파일명","wb") as f:
+	f.write(res.content)
+
+csv
+import csv
+f = open(filename,"w",encoding="utf-8-sig",newline="")
+
+Headless Chrome
+
