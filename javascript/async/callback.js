@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 //JavaScript is synchronous.
 //Excute the code block by orger after hoisting.
@@ -13,59 +13,64 @@
 //console.log(3);
 
 //synchronous callback 즉각적인
-function printImmediately(print){
-    print();
+function printImmediately(print) {
+  print();
 }
 
-printImmediately(()=> console.log(11));
+printImmediately(() => console.log(11));
 
 //asynchronous callback 언제실행될지모르는
-function printWithDelay(print,timeout){
-    setTimeout(print, timeout);
+function printWithDelay(print, timeout) {
+  setTimeout(print, timeout);
 }
 
-printWithDelay(()=> console.log("async callback"),2000);
-
-
-
+printWithDelay(() => console.log("async callback"), 2000);
 
 //Callback Hell Example
 
-class UserStorage{
-    loginUser(id,password,onSuccess,onError){
-        setTimeout(()=>{
-            if (
-                (id === "ellie" && password === "dream") ||
-                (id === "jc" && password === "jc")
-            ){
-                onSuccess(id);
-            }else{
-                onError(new Error("not found"));
-            }
-        },2000);
-    }
-    getRoles(user, onSuccess, onError){
-        setTimeout(()=>{
-            if (user === "ellie"){
-                onSuccess({name : "ellie", role: "admin"});
-            }else{
-                onError(new Error("no access"));
-            }
-        },1000);
-    }
+class UserStorage {
+  loginUser(id, password, onSuccess, onError) {
+    setTimeout(() => {
+      if (
+        (id === "ellie" && password === "dream") ||
+        (id === "jc" && password === "jc")
+      ) {
+        onSuccess(id);
+      } else {
+        onError(new Error("not found"));
+      }
+    }, 2000);
+  }
+  getRoles(user, onSuccess, onError) {
+    setTimeout(() => {
+      if (user === "ellie") {
+        onSuccess({ name: "ellie", role: "admin" });
+      } else {
+        onError(new Error("no access"));
+      }
+    }, 1000);
+  }
 }
 
 const user = new UserStorage();
 
-
 //읽기힘듬 이해힘듬
 
-user.loginUser("ellie", "dream", (id) => {
-    user.getRoles(id, (obj) => {
+user.loginUser(
+  "ellie",
+  "dream",
+  (id) => {
+    user.getRoles(
+      id,
+      (obj) => {
         console.log(`name:${obj.name} , role:${obj.role}`);
-    }, (err) => {
+      },
+      (err) => {
         console.log(err);
-    })
-}, (err) => {
+      }
+    );
+  },
+  (err) => {
     console.log(err);
-});
+  }
+);

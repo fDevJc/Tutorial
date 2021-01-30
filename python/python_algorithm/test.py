@@ -1,4 +1,5 @@
 import sys
+'''asdasdd'''
 
 N = [int(x) for x in sys.stdin.readline().strip().split()][0]
 time_list = [list(map(int, x.strip().split())) for x in sys.stdin.readlines()]
