@@ -13,7 +13,6 @@ class UserStorage {
       }, 2000);
     });
   }
-
   getRoles = (user) => {
     if (user === "ellie") {
       return new Promise((resolve, reject) => {
@@ -22,7 +21,6 @@ class UserStorage {
     }
   };
 }
-
 const user = new UserStorage();
 
 user //
