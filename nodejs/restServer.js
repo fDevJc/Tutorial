@@ -6,6 +6,7 @@ const users = {}; // 데이터 저장용
 http
   .createServer(async (req, res) => {
     try {
+      console.log(req.method + ' // ' + req.url);
       if (req.method === 'GET') {
         if (req.url === '/') {
           const data = await fs.readFile('./restFront.html');
