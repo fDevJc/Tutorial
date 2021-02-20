@@ -68,3 +68,32 @@ print(get_combination_max_value(items,k))
 
 end_time = time.time()
 print("동작시간 : ", end_time-start_time)
+
+
+
+4 6
+
+6 13
+
+3 8
+
+7 15
+
+2 6
+
+    for(int i=1;i<=K;i++){
+        int max=0;
+
+        for(int j=0;j<N;j++){
+            if(i-arr[j][0]>=0){ // wholeWeight - itemWeight
+                int p = i - arr[j][0]; 
+                int res = dp[p] + arr[j][1]; //dp's maxValue + itemValue
+
+                if(res>max){
+                    //printf(" i:%dj%dr%d",i,j,res);
+                    max = res;
+                    dp[i] = max;
+                }
+            }
+        }
+    }
